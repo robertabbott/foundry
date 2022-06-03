@@ -4,7 +4,10 @@ pub use local::LocalTraceIdentifier;
 mod etherscan;
 pub use etherscan::EtherscanIdentifier;
 
-use ethers::abi::{Abi, Address};
+use ethers::{
+    abi::{Abi, Address},
+    prelude::ArtifactId,
+};
 use std::borrow::Cow;
 
 /// An address identity
@@ -19,6 +22,8 @@ pub struct AddressIdentity<'a> {
     pub contract: Option<String>,
     /// The ABI of the contract at this address
     pub abi: Option<Cow<'a, Abi>>,
+    /// The artifact ID of the contract, if any.
+    pub artifact_id: Option<ArtifactId>,
 }
 
 /// Trace identifiers figure out what ABIs and labels belong to all the addresses of the trace.
