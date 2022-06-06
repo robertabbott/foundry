@@ -300,6 +300,15 @@ pub trait Visitable {
     fn visit(&mut self, v: &mut impl Visitor) -> VResult;
 }
 
+impl<T> Visitable for &mut T
+where
+    T: Visitable,
+{
+    fn visit(&mut self, v: &mut impl Visitor) -> VResult {
+        T::visit(self, v)
+    }
+}
+
 impl Visitable for SourceUnitPart {
     fn visit(&mut self, v: &mut impl Visitor) -> VResult {
         match self {
